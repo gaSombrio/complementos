@@ -5,6 +5,7 @@ import  HeroComponents from './components/HeroComponents.vue'
 import  FeaturedComponents from './components/FeaturedComponents.vue'
 import  HeaderComponents from './components/HeaderComponents.vue'
 import CartComponents from './components/CartComponents.vue'
+import BooksListing from './components/BooksListing.vue'
 const showCart = ref(false)
 const cart = ref({
   items: [],
@@ -103,74 +104,18 @@ function addToCart(book) {
   :cart="cart" 
   @increment-book="incrementBookToCart" 
   @decrement-book="decrementBookToCart"
+  @hide-cart="showCart = false"
   />
   </main>
   <main v-else>
     <hero-components />
     <featured-components />
+    <books-listing :books="books" @add-to-cart="addToCart" />
    
-    <section class="books">
-      <article class="book" v-for="book in books" :key="book.id">
-        <img :src="book.cover" :alt="book.title" />
-        <h2>{{ book.title }}</h2>
-        <p class="book-author">{{ book.author }}</p>
-        <span class="price-and-like">
-          <p class="book-price">R$ {{ book.price.toFixed(2) }}</p>
-          <span class="mdi mdi-heart-outline"></span>
-        </span>
-        <button @click="addToCart(book)"><span class="mdi mdi-cart"></span>Comprar</button>
-      </article>
-    </section>
   </main>
   <footer-components />
 </template>
 
 <style scoped>
-
-
-
-
-
-
-.books {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  padding: 5vh 8vw;
-
-  & .book {
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-    width: calc(100% / 4 - 42px);
-    margin: 20px;
-
-    & h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    & .book-author {
-      font-size: 1rem;
-    }
-
-    & .book-price {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    & .price-and-like {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-
-      & .mdi-heart-outline {
-        font-size: 1.3rem;
-        color: #27ae60;
-      }
-    }
-  }
-}
-
-
 
 </style>
