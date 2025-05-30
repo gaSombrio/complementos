@@ -6,17 +6,17 @@
      <header>
     <nav>
       <h1>
-        <a href="#">
+        <RouterLink to="/">
           IFbooks
           <span class="logo-title"> Apreço a livros </span>
-        </a>
+        </RouterLink>
       </h1>
       <div class="search-wrapper">
         <input type="text" class="search" placeholder="Buscar..." />
       </div>
       <ul>
         <li>Termos</li>
-        <li>Equipe</li>
+        <li><RouterLink to ="/Equipe"> Equipe </RouterLink></li>
         <li>Envio</li>
         <li>Devoluções</li>
       </ul>
@@ -36,6 +36,11 @@
   align-items: center;
   padding: 2vh 8vw;
   border-bottom: 2px solid #27ae6099;
+
+    & a{
+      text-decoration: none;
+      color: #000;
+    }
 
   & h1 {
     font-size: 1.3rem;
