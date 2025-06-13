@@ -5,6 +5,10 @@ import  FeaturedComponents from '@/components/FeaturedComponents.vue'
 import CartComponents from '@/components/CartComponents.vue'
 import BooksListing from '@/components/BooksListing.vue'
 
+import { useBooksStore } from '@/stores/books';
+import { useCartStore } from '@/stores/cart';
+const booksStore = useBooksStore();
+const cartStore = useCartStore();
 const showCart = ref(false)
 const cart = ref({
   items: [],
@@ -99,16 +103,18 @@ function addToCart(book) {
 
 <template>
   <CartComponents
-    v-if="showCart"
-    :cart="cart"
-    @hide-cart="showCart = false"
-    @increment-book="incrementBookToCart"
-    @decrement-book="decrementBookToCart"
+  v-if="cartStore.showCart"
+    :cart="cartStore.cart"
+    @hide-cart="cartStore.showCart = false"
+    @increment-book="cartStore.incrementBookToCart"
+    @decrement-book="cartStore.decrementBookToCart"
   />
   <template v-else>
-    <button @click="showCart = true">Ir para carrinho</button>
-    <HeroComponents />
-    <FeaturedComponents />
-    <BooksListing :books="books" @add-to-cart="addToCart" />
+    <hero-banner />
+    <featured-component />
+    <books-listing
+      :books="booksStore.books"
+      @add-to-cart="cartStore.addToCart"
+    />
   </template>
 </template>

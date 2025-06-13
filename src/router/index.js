@@ -12,6 +12,11 @@ const routes = [
     name: 'Team',
     component: () => import('@/views/TeamView.vue'),
   },
+  {
+    path: '/livro/:id',
+    name: 'Team',
+    component: () => import('@/views/HomeView.vue')
+  }
 ];
 
 const router = createRouter({
